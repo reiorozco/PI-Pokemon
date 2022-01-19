@@ -1,5 +1,5 @@
 const axios = require("axios");
-// const { Pokemon, Type } = require("../db.js");
+const { Pokemon, Type } = require("../db.js");
 
 function capitalizeFirstLetter(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -196,10 +196,35 @@ const getPokemonByName = async (name) => {
   }
 };
 
+const getTypesPokemons = async () => {
+  try {
+    const url = "https://pokeapi.co/api/v2/type";
+
+    const reqTypesPokemons = await axios
+      .get(url)
+      .then((res) => res.data.results);
+
+    reqTypesPokemons.forEach((type) => {
+      Type.findOrCreate({
+        where: {
+          name: type.name,
+        },
+      });
+    });
+
+    const typesPokemons = await Type.findAll();
+
+    return typesPokemons;
+  } catch (error) {
+    console.error("Error in getTypesPokemons:", error.message);
+  }
+};
+
 module.exports = {
   getPokemons,
   getDbPokemons,
   getAllPokemons,
   getPokemonById,
   getPokemonByName,
+  getTypesPokemons,
 };
