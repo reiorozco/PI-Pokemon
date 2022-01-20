@@ -1,5 +1,5 @@
 const axios = require("axios");
-const { Pokemon, Type } = require("../db.js");
+const { Pokemon, Type } = require("../db");
 
 function capitalizeFirstLetter(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
@@ -48,7 +48,7 @@ const getPokemons = async () => {
             : gender === 8
             ? "Female"
             : "Male or Female",
-        type: p.types.map((t) => t.type.name),
+        types: p.types.map((t) => t.type.name),
         fromDb: false,
       };
     });
@@ -59,7 +59,7 @@ const getPokemons = async () => {
   }
 };
 
-const getDbPokemons = async () => {
+const dbPokemons = async () => {
   try {
     const data = (
       await Pokemon.findAll({
@@ -81,16 +81,15 @@ const getDbPokemons = async () => {
 
     return data;
   } catch (error) {
-    console.error("Error in getDbPokemons:", error.message);
+    console.error("Error in dbPokemons:", error.message);
   }
 };
 
 const getAllPokemons = async () => {
   try {
-    const getPokemons = await getPokemons();
-    const getDbPokemons = await getDbPokemons();
-    const allPokemons = [...getPokemons, ...getDbPokemons];
-
+    const pokemons = await getPokemons();
+    const pokemonsFromDb = await dbPokemons();
+    const allPokemons = [...pokemons, ...pokemonsFromDb];
     return allPokemons;
   } catch (error) {
     console.error("Error in getAllPokemons:", error.message);
@@ -135,7 +134,7 @@ const getPokemonById = async (id) => {
             : gender === 8
             ? "Female"
             : "Male or Female",
-        type: p.types.map((t) => t.type.name),
+        types: p.types.map((t) => t.type.name),
         fromDb: false,
       };
     });
@@ -185,7 +184,7 @@ const getPokemonByName = async (name) => {
             : gender === 8
             ? "Female"
             : "Male or Female",
-        type: p.types.map((t) => t.type.name),
+        types: p.types.map((t) => t.type.name),
         fromDb: false,
       };
     });
@@ -220,11 +219,64 @@ const getTypesPokemons = async () => {
   }
 };
 
+const createPokemon = async (
+  name,
+  height,
+  weight,
+  health,
+  attack,
+  defense,
+  speed,
+  fromDb,
+  types,
+  img
+) => {
+  try {
+    const newPokemon = await Pokemon.create({
+      name,
+      height,
+      weight,
+      health,
+      attack,
+      defense,
+      speed,
+      fromDb,
+      img,
+    });
+
+    const newPokemonType = await Type.findAll({
+      where: {
+        name: types,
+      },
+    }).then((res) => newPokemon.addType(res));
+
+    return "Your pokemon was successfully created";
+  } catch (error) {
+    console.error("Error in createPokemon:", error.message);
+  }
+};
+
+const deletePokemon = async (id) => {
+  try {
+    await Pokemon.destroy({
+      where: {
+        id: id,
+      },
+    });
+
+    return "Your pokemon was successfully deleted";
+  } catch (error) {
+    console.error("Error in deletePokemon:", error.message);
+  }
+};
+
 module.exports = {
   getPokemons,
-  getDbPokemons,
+  dbPokemons,
   getAllPokemons,
   getPokemonById,
   getPokemonByName,
   getTypesPokemons,
+  createPokemon,
+  deletePokemon,
 };
