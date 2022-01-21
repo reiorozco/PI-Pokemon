@@ -16,6 +16,7 @@
   text-decoration: none;
   font-size: 17px;
   border-bottom: 3px solid transparent;
+  font-family: "Ubuntu", sans-serif;
 }
 
 .topnav .link-home:hover {
@@ -23,7 +24,7 @@
 }
 
 .link-home {
-  font-size: 25px !important;
+  font-size: 30px !important;
   color: #000000 !important;
 }
 
