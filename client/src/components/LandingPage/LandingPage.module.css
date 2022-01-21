@@ -1,7 +1,3 @@
-:root {
-  --red-pokemon: #da1212;
-}
-
 .bg {
   /* The image used */
   background-image: url("../../images/landing-background.jpg");

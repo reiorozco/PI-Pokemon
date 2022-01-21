@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getPokemons, getTypes } from "../../redux/actions";
 
-import "./LandingPage.css";
+import styles from "./LandingPage.module.css";
 
 export default function LandingPage() {
   const dispatch = useDispatch();
@@ -18,17 +18,17 @@ export default function LandingPage() {
   }, [dispatch]);
 
   return (
-    <div className="bg">
-      <div className="ubuntu container-landing">
+    <div className={styles["bg"]}>
+      <div className={`ubuntu ${styles["container-landing"]}`}>
         <div>
-          <h1 className="h1-landing">
-            Pokemon <span className="text-wiki">WiKi</span>
+          <h1 className={styles["h1-landing"]}>
+            Pokemon <span className={styles["text-wiki"]}>WiKi</span>
           </h1>
         </div>
         <div>
-          <p className="text-landing">
+          <p className={styles["text-landing"]}>
             &#128075; Hi! click{" "}
-            <Link to="/pokemons" className="plain-link">
+            <Link to="/home" className={styles["plain-link"]}>
               here
             </Link>
             . Welcome to the <b>Pokemon World</b>.

@@ -1,0 +1,54 @@
+.topnav {
+  background-color: rgba(180, 180, 180, 0.75);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+}
+
+.topnav a {
+  float: left;
+  display: block;
+  text-align: center;
+  padding: 14px 16px;
+  color: white;
+  text-decoration: none;
+  font-size: 17px;
+  border-bottom: 3px solid transparent;
+}
+
+.topnav .link-home:hover {
+  border-bottom: 3px solid red;
+}
+
+.link-home {
+  font-size: 25px !important;
+  color: #000000 !important;
+}
+
+.text-wiki {
+  color: var(--red-pokemon);
+}
+
+.h1-navbar {
+  font-size: 25px;
+  color: #000000;
+}
+
+.btn {
+  background-color: var(--red-pokemon);
+  border: none;
+  border-radius: 20px;
+  padding: 0px 5px;
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  margin-right: 30px;
+  opacity: 0.6;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  opacity: 1;
+}
