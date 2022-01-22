@@ -1,5 +1,5 @@
 .home-text {
-  font-size: 40px;
+  font-size: 50px;
   font-weight: 600;
 }
 
@@ -7,4 +7,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.container {
+  padding: 0 75px;
+  display: grid;
+  grid-template-columns: 0.3fr 0.7fr;
+  grid-gap: 20px;
+}
+
+.container-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
 }

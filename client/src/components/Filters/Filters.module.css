@@ -1,0 +1,36 @@
+.filters-head {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.h1-filters {
+  font-weight: 600;
+}
+
+.btn-filter {
+  border: 2px solid black;
+  border-radius: 8px;
+  background-color: white;
+  color: black;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  border-color: #e7e7e7;
+  color: black;
+}
+
+.btn-filter:hover {
+  background: #e7e7e7;
+}
+
+.div-accordion {
+  padding: 0 10px;
+}
+
+.accordion {
+  max-width: 600px;
+  margin: 2rem auto;
+}

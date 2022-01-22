@@ -1,0 +1,32 @@
+.img {
+  max-width: 100%;
+  height: auto;
+}
+
+.div-description {
+  padding: 10px;
+}
+
+.div-types {
+  display: flex;
+  gap: 10px;
+}
+
+.div-name {
+  margin: 0px 0 10px 0;
+}
+
+.cards {
+  border: 1px solid var(--red-pokemon);
+  border-radius: 10px;
+}
+
+.types {
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  padding: 2.5px 7.5px;
+  height: 25px;
+  width: 80px;
+}
