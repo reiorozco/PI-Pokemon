@@ -21,3 +21,9 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
 }
+
+.pagination-bar {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}

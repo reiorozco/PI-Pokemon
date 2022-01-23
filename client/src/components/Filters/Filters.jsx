@@ -6,7 +6,7 @@ import styles from "./Filters.module.css";
 
 export default function Filters() {
   return (
-    <div>
+    <div style={{ position: "sticky", top: "20px" }}>
       <div className={styles["filters-head"]}>
         <h1 className={styles["h1-filters"]}>Filters</h1>
         <button className={styles["btn-filter"]}>Clear Filters</button>
