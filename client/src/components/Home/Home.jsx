@@ -37,7 +37,7 @@ export default function Home() {
           <Filters />
         </div>
         <div className={styles["container-cards"]}>
-          {currentTableData?.map((p) => {
+          {(pokemons.length ? pokemons : currentTableData).map((p) => {
             return (
               <Cards
                 key={p.id}
@@ -54,7 +54,7 @@ export default function Home() {
       <Pagination
         className={styles["pagination-bar"]}
         currentPage={currentPage}
-        totalCount={allPokemons.length}
+        totalCount={pokemons.length || allPokemons.length}
         pageSize={PageSize}
         onPageChange={(page) => setCurrentPage(page)}
       />

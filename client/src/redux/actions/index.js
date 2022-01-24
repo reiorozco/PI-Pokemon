@@ -2,6 +2,8 @@ import axios from "axios";
 
 export const GET_POKEMONS = "GET_POKEMONS";
 export const GET_TYPES = "GET_TYPES";
+export const GET_POKEMON_BY_NAME = "GET_POKEMON_BY_NAME";
+export const RESET_FILTERS = "RESET_FILTERS";
 
 export const getPokemons = () => {
   return async function (dispatch) {
@@ -22,5 +24,24 @@ export const getTypes = () => {
     } catch (error) {
       console.error("Error in action getTypes:", error.message);
     }
+  };
+};
+
+export const getPokemonByName = (name) => {
+  return async function (dispatch) {
+    try {
+      const pokemonByName = await axios(
+        `http://localhost:3001/pokemons?name=${name}`
+      );
+      dispatch({ type: GET_POKEMON_BY_NAME, payload: pokemonByName.data });
+    } catch (error) {
+      console.error("Error in action getPokemonByName:", error.message);
+    }
+  };
+};
+
+export const resetFilters = () => {
+  return {
+    type: RESET_FILTERS,
   };
 };
