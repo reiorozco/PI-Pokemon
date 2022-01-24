@@ -36,6 +36,7 @@ export const getPokemonByName = (name) => {
       dispatch({ type: GET_POKEMON_BY_NAME, payload: pokemonByName.data });
     } catch (error) {
       console.error("Error in action getPokemonByName:", error.message);
+      dispatch({ type: GET_POKEMON_BY_NAME, payload: [name] });
     }
   };
 };

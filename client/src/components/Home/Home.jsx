@@ -38,7 +38,11 @@ export default function Home() {
         </div>
         <div className={styles["container-cards"]}>
           {(pokemons.length ? pokemons : currentTableData).map((p) => {
-            return (
+            return typeof p === "string" ? (
+              <h1 style={{ gridColumn: "none" }}>
+                Pokemon with the name {p} was not found :/
+              </h1>
+            ) : (
               <Cards
                 key={p.id}
                 img={p.img}
