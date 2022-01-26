@@ -21,8 +21,11 @@ export default function Home() {
   const currentTableData = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * PageSize;
     const lastPageIndex = firstPageIndex + PageSize;
-    return allPokemons.slice(firstPageIndex, lastPageIndex);
-  }, [allPokemons, currentPage]);
+    return (pokemons.length ? pokemons : allPokemons).slice(
+      firstPageIndex,
+      lastPageIndex
+    );
+  }, [allPokemons, currentPage, pokemons]);
 
   return (
     <div>
@@ -37,9 +40,14 @@ export default function Home() {
           <Filters />
         </div>
         <div className={styles["container-cards"]}>
-          {(pokemons.length ? pokemons : currentTableData).map((p) => {
-            return typeof p === "string" ? (
-              <h1 style={{ gridColumn: "none" }}>
+          {currentTableData.map((p, index) => {
+            return p === "noData" ? (
+              <h1 key={index} style={{ gridColumn: "none" }}>
+                We didn't find any Pokémon created by you, click Create Pokémon
+                :{")"}
+              </h1>
+            ) : typeof p === "string" ? (
+              <h1 key={index} style={{ gridColumn: "none" }}>
                 Pokemon with the name {p} was not found :/
               </h1>
             ) : (

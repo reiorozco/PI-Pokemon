@@ -42,11 +42,11 @@
   color: white;
 }
 
-.checkbox {
+.radio {
   display: none;
 }
 
-.checkbox:checked + label {
+.radio:checked + label {
   background: var(--red-pokemon);
   color: white;
 }

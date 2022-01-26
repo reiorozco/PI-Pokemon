@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getPokemonByName, resetFilters } from "../../redux/actions";
 import styles from "./Search.module.css";
@@ -14,8 +14,13 @@ export default function Search() {
 
   const handleChange = (e) => {
     setPokemonByName(e.target.value);
-    pokemonByName.length === 1 && dispatch(resetFilters());
   };
+
+  useEffect(() => {
+    pokemonByName.length || dispatch(resetFilters());
+
+    // return () => {};
+  }, [dispatch, pokemonByName]);
 
   return (
     <form className={styles["form"]} onSubmit={handleSubmit}>

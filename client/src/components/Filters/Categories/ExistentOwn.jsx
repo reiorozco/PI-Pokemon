@@ -1,10 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { filterByOrigin } from "../../../redux/actions";
 import styles from "./ExistentOwn.module.css";
 
 const ExistentOwn = () => {
   const [isActive, setIsActive] = useState(false);
+  const [existentOrOwn, setExistentOrOwn] = useState("");
 
-  const options = ["All", "Existent", "Own"];
+  const dispatch = useDispatch();
+
+  const options = ["Existent", "Own"];
+
+  const handleChange = (e) => {
+    let option;
+
+    option = e.target.value;
+
+    setExistentOrOwn(option);
+  };
+
+  useEffect(() => {
+    dispatch(filterByOrigin(existentOrOwn));
+
+    // return () => {};
+  }, [dispatch, existentOrOwn]);
 
   return (
     <div className={styles["accordion-item"]}>
@@ -18,18 +37,34 @@ const ExistentOwn = () => {
         <div>{isActive ? "-" : "+"}</div>
       </div>
       {isActive && (
-        <div className={styles["accordion-content"]}>
+        <form
+          id="formExistentOwn"
+          onChange={handleChange}
+          className={styles["accordion-content"]}
+        >
+          <input
+            type="radio"
+            className={styles["radio"]}
+            name="ExistentOwn"
+            value="All"
+            id="All-0"
+            defaultChecked
+          />
+          <label htmlFor="All-0" className={styles["btn-types"]}>
+            All
+          </label>
           {options.map((o, index) => {
             return (
               <React.Fragment key={index}>
                 <input
-                  type="checkbox"
-                  className={styles["checkbox"]}
-                  name={o}
-                  id={`${o}-${index}`}
+                  type="radio"
+                  className={styles["radio"]}
+                  name="ExistentOwn"
+                  value={o}
+                  id={`${o}-${index + 1}`}
                 />
                 <label
-                  htmlFor={`${o}-${index}`}
+                  htmlFor={`${o}-${index + 1}`}
                   className={styles["btn-types"]}
                 >
                   {o}
@@ -37,7 +72,7 @@ const ExistentOwn = () => {
               </React.Fragment>
             );
           })}
-        </div>
+        </form>
       )}
     </div>
   );

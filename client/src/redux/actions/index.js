@@ -4,6 +4,9 @@ export const GET_POKEMONS = "GET_POKEMONS";
 export const GET_TYPES = "GET_TYPES";
 export const GET_POKEMON_BY_NAME = "GET_POKEMON_BY_NAME";
 export const RESET_FILTERS = "RESET_FILTERS";
+export const FILTER_BY_TYPE = "FILTER_BY_TYPE";
+export const FILTER_BY_ORIGIN = "FILTER_BY_ORIGIN";
+export const ORDER_BY = "ORDER_BY";
 
 export const getPokemons = () => {
   return async function (dispatch) {
@@ -44,5 +47,26 @@ export const getPokemonByName = (name) => {
 export const resetFilters = () => {
   return {
     type: RESET_FILTERS,
+  };
+};
+
+export const filterByType = (types) => {
+  return {
+    type: FILTER_BY_TYPE,
+    payload: types,
+  };
+};
+
+export const filterByOrigin = (origin) => {
+  return {
+    type: FILTER_BY_ORIGIN,
+    payload: origin,
+  };
+};
+
+export const orderBy = (order) => {
+  return {
+    type: ORDER_BY,
+    payload: order,
   };
 };
