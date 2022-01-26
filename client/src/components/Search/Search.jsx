@@ -3,13 +3,14 @@ import { useDispatch } from "react-redux";
 import { getPokemonByName, resetFilters } from "../../redux/actions";
 import styles from "./Search.module.css";
 
-export default function Search() {
+export default function Search({ setCurrentPage }) {
   const dispatch = useDispatch();
   const [pokemonByName, setPokemonByName] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     pokemonByName && dispatch(getPokemonByName(pokemonByName));
+    setCurrentPage(1);
   };
 
   const handleChange = (e) => {
@@ -17,10 +18,14 @@ export default function Search() {
   };
 
   useEffect(() => {
-    pokemonByName.length || dispatch(resetFilters());
+    pokemonByName.length ||
+      (() => {
+        dispatch(resetFilters());
+        setCurrentPage(1);
+      })();
 
     // return () => {};
-  }, [dispatch, pokemonByName]);
+  }, [dispatch, pokemonByName, setCurrentPage]);
 
   return (
     <form className={styles["form"]} onSubmit={handleSubmit}>

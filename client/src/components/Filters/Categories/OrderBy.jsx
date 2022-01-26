@@ -3,21 +3,12 @@ import { useDispatch } from "react-redux";
 import { orderBy } from "../../../redux/actions";
 import styles from "./OrderBy.module.css";
 
-const OrderBy = () => {
+const OrderBy = ({ order, handleChangeOrder }) => {
   const [isActive, setIsActive] = useState(false);
-  const [order, setOrder] = useState("");
 
   const dispatch = useDispatch();
 
   const options = ["High Attack", "Less Attack", "A-Z", "Z-A"];
-
-  const handleChange = (e) => {
-    let order;
-
-    order = e.target.value;
-
-    setOrder(order);
-  };
 
   useEffect(() => {
     dispatch(orderBy(order));
@@ -38,8 +29,8 @@ const OrderBy = () => {
       </div>
       {isActive && (
         <form
-          id="formOrderBy"
-          onChange={handleChange}
+          id="formFilters"
+          onChange={(e) => handleChangeOrder(e)}
           className={styles["accordion-content"]}
         >
           <input

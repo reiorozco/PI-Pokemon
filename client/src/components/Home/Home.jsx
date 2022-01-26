@@ -33,11 +33,11 @@ export default function Home() {
         <h1 className={styles["home-text"]}>Pokemons</h1>
       </div>
 
-      <Search />
+      <Search setCurrentPage={setCurrentPage} />
 
       <div className={styles["container"]}>
         <div>
-          <Filters />
+          <Filters setCurrentPage={setCurrentPage} />
         </div>
         <div className={styles["container-cards"]}>
           {currentTableData.map((p, index) => {

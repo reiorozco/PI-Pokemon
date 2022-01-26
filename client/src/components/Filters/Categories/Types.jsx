@@ -3,9 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { filterByType } from "../../../redux/actions";
 import styles from "./Types.module.css";
 
-const Types = () => {
+const Types = ({ arrayTypes, handleChangeTypes }) => {
   const [isActive, setIsActive] = useState(false);
-  const [arrayTypes, setArrayTypes] = useState([]);
 
   const allPokemons = useSelector((state) => state.allPokemons);
   const dispatch = useDispatch();
@@ -14,16 +13,6 @@ const Types = () => {
     () => [...new Set(allPokemons.map((t) => t.types).flat())],
     [allPokemons]
   );
-
-  const handleChange = (e) => {
-    let array;
-
-    arrayTypes.indexOf(e.target.name) !== -1
-      ? (array = arrayTypes.filter((f) => f !== e.target.name))
-      : (array = [...arrayTypes, e.target.name]);
-
-    setArrayTypes(array);
-  };
 
   useEffect(() => {
     dispatch(filterByType(arrayTypes));
@@ -44,8 +33,8 @@ const Types = () => {
       </div>
       {isActive && (
         <form
-          id="formTypes"
-          onChange={handleChange}
+          id="formFilters"
+          onChange={(e) => handleChangeTypes(e)}
           className={styles["accordion-content"]}
         >
           {currentTypes.map((t, index) => {

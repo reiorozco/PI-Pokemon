@@ -3,21 +3,12 @@ import { useDispatch } from "react-redux";
 import { filterByOrigin } from "../../../redux/actions";
 import styles from "./ExistentOwn.module.css";
 
-const ExistentOwn = () => {
+const ExistentOwn = ({ existentOrOwn, handleChangeExistentOwn }) => {
   const [isActive, setIsActive] = useState(false);
-  const [existentOrOwn, setExistentOrOwn] = useState("");
 
   const dispatch = useDispatch();
 
   const options = ["Existent", "Own"];
-
-  const handleChange = (e) => {
-    let option;
-
-    option = e.target.value;
-
-    setExistentOrOwn(option);
-  };
 
   useEffect(() => {
     dispatch(filterByOrigin(existentOrOwn));
@@ -38,8 +29,8 @@ const ExistentOwn = () => {
       </div>
       {isActive && (
         <form
-          id="formExistentOwn"
-          onChange={handleChange}
+          id="formFilters"
+          onChange={(e) => handleChangeExistentOwn(e)}
           className={styles["accordion-content"]}
         >
           <input
