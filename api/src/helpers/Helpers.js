@@ -25,7 +25,7 @@ const getPokemons = async () => {
       dataSpecies.push(pokemonSpecie);
     }
 
-    const pokemons = data.map((p, index) => {
+    return data.map((p, index) => {
       let gender = dataSpecies[index].gender_rate;
 
       return {
@@ -52,8 +52,6 @@ const getPokemons = async () => {
         fromDb: false,
       };
     });
-
-    return pokemons;
   } catch (error) {
     console.error("Error in getPokemons:", error.message);
   }
@@ -61,7 +59,7 @@ const getPokemons = async () => {
 
 const dbPokemons = async () => {
   try {
-    const data = (
+    return (
       await Pokemon.findAll({
         include: {
           model: Type,
@@ -78,8 +76,6 @@ const dbPokemons = async () => {
         types: json.types.map((type) => type.name),
       };
     });
-
-    return data;
   } catch (error) {
     console.error("Error in dbPokemons:", error.message);
   }
@@ -89,8 +85,7 @@ const getAllPokemons = async () => {
   try {
     const pokemons = await getPokemons();
     const pokemonsFromDb = await dbPokemons();
-    const allPokemons = [...pokemons, ...pokemonsFromDb];
-    return allPokemons;
+    return [...pokemons, ...pokemonsFromDb];
   } catch (error) {
     console.error("Error in getAllPokemons:", error.message);
   }
@@ -111,7 +106,7 @@ const getPokemonById = async (id) => {
     );
     dataSpecies.push(requestSpecie);
 
-    let pokemon = data.map((p, index) => {
+    return data.map((p, index) => {
       let gender = dataSpecies[index].gender_rate;
 
       return {
@@ -138,8 +133,6 @@ const getPokemonById = async (id) => {
         fromDb: false,
       };
     });
-
-    return pokemon;
   } catch (error) {
     console.error("Error in getPokemonById:", error.message);
   }
@@ -161,7 +154,7 @@ const getPokemonByName = async (name) => {
     );
     dataSpecies.push(requestSpecie);
 
-    let pokemon = data.map((p, index) => {
+    return data.map((p, index) => {
       let gender = dataSpecies[index].gender_rate;
 
       return {
@@ -188,8 +181,6 @@ const getPokemonByName = async (name) => {
         fromDb: false,
       };
     });
-
-    return pokemon;
   } catch (error) {
     console.error("Error in getPokemonByName:", error.message);
   }
@@ -211,9 +202,7 @@ const getTypesPokemons = async () => {
       });
     });
 
-    const typesPokemons = await Type.findAll();
-
-    return typesPokemons;
+    return await Type.findAll();
   } catch (error) {
     console.error("Error in getTypesPokemons:", error.message);
   }
@@ -244,7 +233,7 @@ const createPokemon = async (
       img,
     });
 
-    const newPokemonType = await Type.findAll({
+    await Type.findAll({
       where: {
         name: types,
       },
