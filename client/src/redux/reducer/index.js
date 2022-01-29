@@ -5,6 +5,7 @@ import {
   GET_POKEMON_BY_NAME,
   GET_TYPES,
   ORDER_BY,
+  POST_POKEMON,
   RESET_FILTERS,
 } from "../actions";
 
@@ -34,6 +35,11 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         pokemons: action.payload,
+      };
+
+    case POST_POKEMON:
+      return {
+        ...state,
       };
 
     case RESET_FILTERS:

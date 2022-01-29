@@ -30,7 +30,7 @@
 .btn-types {
   border-radius: 10px;
   font-size: 16px;
-  padding: 2.5px 7.5px;
+  padding: 3px 8px;
   cursor: pointer;
   border: 2px solid var(--red-pokemon);
   color: var(--red-pokemon);

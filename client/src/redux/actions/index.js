@@ -3,6 +3,7 @@ import axios from "axios";
 export const GET_POKEMONS = "GET_POKEMONS";
 export const GET_TYPES = "GET_TYPES";
 export const GET_POKEMON_BY_NAME = "GET_POKEMON_BY_NAME";
+export const POST_POKEMON = "POST_POKEMON";
 export const RESET_FILTERS = "RESET_FILTERS";
 export const FILTER_BY_TYPE = "FILTER_BY_TYPE";
 export const FILTER_BY_ORIGIN = "FILTER_BY_ORIGIN";
@@ -40,6 +41,21 @@ export const getPokemonByName = (name) => {
     } catch (error) {
       console.error("Error in action getPokemonByName:", error.message);
       dispatch({ type: GET_POKEMON_BY_NAME, payload: [name] });
+    }
+  };
+};
+
+export const postPokemon = (formData) => {
+  return async function (dispatch) {
+    try {
+      const pokemonCreated = await axios.post(
+        `http://localhost:3001/pokemons`,
+        formData
+      );
+      dispatch({ type: POST_POKEMON, payload: pokemonCreated });
+    } catch (error) {
+      console.error("Error in action postPokemon:", error.message);
+      // dispatch({ type: GET_POKEMON_BY_NAME, payload: });
     }
   };
 };

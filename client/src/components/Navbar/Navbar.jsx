@@ -14,7 +14,7 @@ export default function Navbar() {
         </h1>
 
         <button className={styles["btn"]}>
-          <Link to="/new-pokemon">Create Pokemon</Link>
+          <Link to="/home/new-pokemon">Create Pokemon</Link>
         </button>
       </div>
       <Outlet />

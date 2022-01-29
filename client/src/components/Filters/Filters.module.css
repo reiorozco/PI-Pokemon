@@ -11,15 +11,13 @@
 }
 
 .btn-filter {
-  border: 2px solid black;
+  border: 2px solid #e7e7e7;
   border-radius: 8px;
   background-color: white;
   color: black;
   padding: 14px 28px;
   font-size: 16px;
   cursor: pointer;
-  border-color: #e7e7e7;
-  color: black;
 }
 
 .btn-filter:hover {

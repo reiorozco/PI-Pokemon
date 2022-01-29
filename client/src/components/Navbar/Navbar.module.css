@@ -41,11 +41,10 @@
   background-color: var(--red-pokemon);
   border: none;
   border-radius: 20px;
-  padding: 0px 5px;
+  padding: 0 5px;
   text-align: center;
   font-size: 16px;
-  margin: 4px 2px;
-  margin-right: 30px;
+  margin: 4px 30px 4px 2px;
   opacity: 0.6;
   transition: 0.3s;
 }

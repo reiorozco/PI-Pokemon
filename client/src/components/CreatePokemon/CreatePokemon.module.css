@@ -1,0 +1,79 @@
+.containerForm {
+  display: flex;
+  justify-content: center;
+}
+
+.borderForm {
+  display: flex;
+  justify-content: center;
+  border: 1px solid var(--red-pokemon);
+  border-radius: 10px;
+  padding: 0 25px 25px 25px;
+  width: 50%;
+  margin: 50px;
+}
+
+.formCreate {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.stats {
+  display: grid;
+  grid-template: repeat(3, 1fr) / repeat(2, 1fr);
+  gap: 10px;
+}
+
+.checkbox {
+  display: none;
+}
+
+.checkbox:checked + label {
+  background: var(--red-pokemon);
+  color: white;
+}
+
+.btn-types {
+  border-radius: 10px;
+  font-size: 16px;
+  padding: 3px 8px;
+  cursor: pointer;
+  border: 2px solid var(--red-pokemon);
+  color: var(--red-pokemon);
+  background-color: white;
+}
+
+.btn-types:hover {
+  background: var(--red-pokemon);
+  color: white;
+}
+
+.checkbox-content {
+  background-color: white;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding-top: 10px;
+  padding-bottom: 15px;
+}
+
+.btn-filter {
+  border: 2px solid #e7e7e7;
+  border-radius: 8px;
+  background-color: white;
+  color: black;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 50%;
+}
+
+.btn-filter:hover {
+  background: #e7e7e7;
+}
+
+.btn-center {
+  display: flex;
+  justify-content: center;
+}

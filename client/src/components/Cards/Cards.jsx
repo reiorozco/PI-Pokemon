@@ -27,22 +27,40 @@ export default function Cards({ img, id, name, types }) {
 
   return (
     <div className={styles["cards"]}>
-      <img src={img} alt="sprites" className={styles["img"]} />
+      <img
+        src={
+          img ||
+          "https://raw.githubusercontent.com/martinbogado/Pokemon-PI/main/client/src/images/random.png"
+        }
+        alt="sprites"
+        className={styles["img"]}
+      />
       <div className={styles["div-description"]}>
-        <span className={styles["div-id"]}>{`N. °${numberId}`}</span>
+        <span className={styles["div-id"]}>{`N. °${
+          numberId.length > 10 ? "XXX" : numberId
+        }`}</span>
         <h1 className={styles["div-name"]}>{name}</h1>
         <div className={styles["div-types"]}>
-          {types.map((t, index) => {
-            return (
-              <button
-                key={index}
-                style={{ backgroundColor: `${colours[t]}` }}
-                className={styles["types"]}
-              >
-                {t}
-              </button>
-            );
-          })}
+          {types.length ? (
+            types.map((t, index) => {
+              return (
+                <button
+                  key={index}
+                  style={{ backgroundColor: `${colours[t]}` }}
+                  className={styles["types"]}
+                >
+                  {t}
+                </button>
+              );
+            })
+          ) : (
+            <button
+              style={{ backgroundColor: `${colours["unknown"]}` }}
+              className={styles["types"]}
+            >
+              unknown
+            </button>
+          )}
         </div>
       </div>
     </div>
