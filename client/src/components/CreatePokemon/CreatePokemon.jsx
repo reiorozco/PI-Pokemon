@@ -44,17 +44,34 @@ export default function CreatePokemon() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(postPokemon(formInputs));
-    formInputs = {
-      name: "",
-      height: 50,
-      weight: 50,
-      health: 50,
-      attack: 50,
-      defense: 50,
-      speed: 50,
-      types: [],
-    };
+    const answer = window.confirm("Are you sure?");
+
+    function resetForm() {
+      document.getElementById("formCreate").reset();
+      formInputs = {
+        name: "",
+        height: 50,
+        weight: 50,
+        health: 50,
+        attack: 50,
+        defense: 50,
+        speed: 50,
+        types: [],
+      };
+    }
+
+    answer
+      ? (() => {
+          window.alert("Your Pokemon was saved to the database.");
+          dispatch(postPokemon(formInputs));
+
+          resetForm();
+        })()
+      : (() => {
+          window.alert("Your Pokemon wasn't saved to the database.");
+
+          resetForm();
+        })();
   };
 
   useEffect(() => {
@@ -67,6 +84,7 @@ export default function CreatePokemon() {
     <div className={styles["containerForm"]}>
       <div className={styles["borderForm"]}>
         <form
+          id="formCreate"
           onSubmit={handleSubmit}
           onChange={handleChange}
           className={styles["formCreate"]}
@@ -92,13 +110,23 @@ export default function CreatePokemon() {
             <div>
               <label>Height (m):</label>
               <br />
-              <input type="number" name="height" defaultValue={50} style={{ borderRadius: "5px" }} />
+              <input
+                type="number"
+                name="height"
+                defaultValue={50}
+                style={{ borderRadius: "5px" }}
+              />
             </div>
 
             <div>
               <label>Weight (kg):</label>
               <br />
-              <input type="number" name="weight" defaultValue={50} style={{ borderRadius: "5px" }} />
+              <input
+                type="number"
+                name="weight"
+                defaultValue={50}
+                style={{ borderRadius: "5px" }}
+              />
             </div>
 
             <div>

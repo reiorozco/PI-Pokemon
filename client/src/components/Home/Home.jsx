@@ -1,10 +1,11 @@
 import React, { useMemo, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import Cards from "../Cards/Cards";
 import Filters from "../Filters/Filters";
 import Pagination from "../Pagination/Pagination";
 import Search from "../Search/Search";
+import loader from "../../images/loading-image.gif";
 
 import styles from "./Home.module.css";
 
@@ -13,10 +14,10 @@ let PageSize = 9;
 export default function Home() {
   const [currentPage, setCurrentPage] = useState(1);
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
+  // const types = useSelector((state) => state.types);
   const pokemons = useSelector((state) => state.pokemons);
   const allPokemons = useSelector((state) => state.allPokemons);
-  const types = useSelector((state) => state.types);
 
   const currentTableData = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * PageSize;
@@ -40,26 +41,39 @@ export default function Home() {
           <Filters setCurrentPage={setCurrentPage} />
         </div>
         <div className={styles["container-cards"]}>
-          {currentTableData.map((p, index) => {
-            return p === "noData" ? (
-              <h1 key={index} style={{ gridColumn: "none" }}>
-                We didn't find any Pokémon created by you, click Create Pokémon
-                :{")"}
-              </h1>
-            ) : typeof p === "string" ? (
-              <h1 key={index} style={{ gridColumn: "none" }}>
-                Pokemon with the name {p} was not found :/
-              </h1>
-            ) : (
-              <Cards
-                key={p.id}
-                img={p.img}
-                id={p.id}
-                name={p.name}
-                types={p.types}
-              />
-            );
-          })}
+          {currentTableData.length > 0 ? (
+            currentTableData.map((p, index) => {
+              return p === "noData" ? (
+                <h1 key={index} style={{ gridColumn: "none" }}>
+                  We didn't find any Pokémon created by you, click Create
+                  Pokémon :{")"}
+                </h1>
+              ) : typeof p === "string" ? (
+                <h1 key={index} style={{ gridColumn: "none" }}>
+                  Pokemon with the name {p} was not found :/
+                </h1>
+              ) : (
+                <Cards
+                  key={p.id}
+                  img={p.img}
+                  id={p.id}
+                  name={p.name}
+                  types={p.types}
+                />
+              );
+            })
+          ) : (
+            <img
+              src={loader}
+              alt="loader"
+              style={{
+                gridColumnStart: "2",
+                gridRowStart: "2",
+                maxWidth: "100%",
+                height: "auto",
+              }}
+            />
+          )}
         </div>
       </div>
 

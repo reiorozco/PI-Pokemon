@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./Cards.module.css";
 import { Link } from "react-router-dom";
+import randomImage from "../../images/random-image.png";
 
 export default function Cards({ img, id, name, types }) {
   const numberId = id.toString().padStart(3, "0");
@@ -29,14 +30,7 @@ export default function Cards({ img, id, name, types }) {
   return (
     <div className={styles["cards"]}>
       <Link to={`/home/${id}`}>
-        <img
-          src={
-            img ||
-            "https://raw.githubusercontent.com/martinbogado/Pokemon-PI/main/client/src/images/random.png"
-          }
-          alt="sprites"
-          className={styles["img"]}
-        />
+        <img src={img || randomImage} alt="sprites" className={styles["img"]} />
       </Link>
 
       <div className={styles["div-description"]}>

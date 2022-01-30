@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import styles from "./CardsDetails.module.css";
+import randomImage from "../../images/random-image.png";
 
 function CardsDetails() {
   const allPokemons = useSelector((state) => state.allPokemons);
@@ -43,10 +44,7 @@ function CardsDetails() {
 
         <div className={styles["details"]}>
           <img
-            src={
-              pokemonById.img ||
-              "https://raw.githubusercontent.com/martinbogado/Pokemon-PI/main/client/src/images/random.png"
-            }
+            src={pokemonById.img || randomImage}
             alt="sprites"
             className={styles["img"]}
           />
