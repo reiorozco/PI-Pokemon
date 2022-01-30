@@ -90,15 +90,15 @@ export default function CreatePokemon() {
 
           <div className={styles["stats"]}>
             <div>
-              <label>Height:</label>
+              <label>Height (m):</label>
               <br />
-              <input type="range" name="height" min="0" max="100" step="10" />
+              <input type="number" name="height" defaultValue={50} style={{ borderRadius: "5px" }} />
             </div>
 
             <div>
-              <label>Weight:</label>
+              <label>Weight (kg):</label>
               <br />
-              <input type="range" name="weight" min="0" max="100" step="10" />
+              <input type="number" name="weight" defaultValue={50} style={{ borderRadius: "5px" }} />
             </div>
 
             <div>

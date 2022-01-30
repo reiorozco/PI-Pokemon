@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./Cards.module.css";
+import { Link } from "react-router-dom";
 
 export default function Cards({ img, id, name, types }) {
   const numberId = id.toString().padStart(3, "0");
@@ -27,18 +28,21 @@ export default function Cards({ img, id, name, types }) {
 
   return (
     <div className={styles["cards"]}>
-      <img
-        src={
-          img ||
-          "https://raw.githubusercontent.com/martinbogado/Pokemon-PI/main/client/src/images/random.png"
-        }
-        alt="sprites"
-        className={styles["img"]}
-      />
+      <Link to={`/home/${id}`}>
+        <img
+          src={
+            img ||
+            "https://raw.githubusercontent.com/martinbogado/Pokemon-PI/main/client/src/images/random.png"
+          }
+          alt="sprites"
+          className={styles["img"]}
+        />
+      </Link>
+
       <div className={styles["div-description"]}>
-        <span className={styles["div-id"]}>{`N. °${
-          numberId.length > 10 ? "XXX" : numberId
-        }`}</span>
+        <span className={styles["div-id"]}>
+          {numberId.length > 10 ? "CREATED" : `N. °${numberId}`}
+        </span>
         <h1 className={styles["div-name"]}>{name}</h1>
         <div className={styles["div-types"]}>
           {types.length ? (
