@@ -6,13 +6,14 @@ import randomImage from "../../images/random-image.png";
 
 function CardsDetails() {
   const allPokemons = useSelector((state) => state.allPokemons);
+  const details = useSelector((state) => state.details);
   const { id } = useParams();
-  console.log(id);
 
-  const pokemonById = allPokemons.filter(
-    (p) => p.id === (id.length > 10 ? id : parseInt(id))
-  )[0];
-  console.log(pokemonById);
+  const pokemonById =
+    allPokemons.filter(
+      (p) => p.id === (id.length > 10 ? id : parseInt(id))
+    )[0] || details[0];
+
   const numberId = id.padStart(3, "0");
   const colours = {
     normal: "#A8A77Aaa",
