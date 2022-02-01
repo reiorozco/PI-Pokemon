@@ -45,6 +45,7 @@ const Pagination = (props) => {
       >
         <div className="arrow left" />
       </li>
+
       {paginationRange.map((pageNumber, index) => {
         if (pageNumber === DOTS) {
           return (
@@ -66,6 +67,7 @@ const Pagination = (props) => {
           </li>
         );
       })}
+
       <li
         className={classnames("pagination-item", {
           disabled: currentPage === lastPage,

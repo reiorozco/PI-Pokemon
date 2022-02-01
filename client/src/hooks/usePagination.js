@@ -21,6 +21,7 @@ export const usePagination = ({
     const totalPageNumbers = siblingCount + 5;
 
     /*
+      Case 1: < (1) 2 3 4 5 >
       If the number of pages is less than the page numbers we want to show in our
       paginationComponent, we return the range [1..totalPageCount]
     */
@@ -28,6 +29,9 @@ export const usePagination = ({
       return range(1, totalPageCount);
     }
 
+    /*
+      Calculate left and right sibling index and make sure they are within range 1 and totalPageCount
+    */
     const leftSiblingIndex = Math.max(currentPage - siblingCount, 1);
     const rightSiblingIndex = Math.min(
       currentPage + siblingCount,
@@ -35,7 +39,7 @@ export const usePagination = ({
     );
 
     /*
-      We do not want to show dots if there is only one position left 
+      We do not want to show dots if there is only one position left
       after/before the left/right page count as that would lead to a change if our Pagination
       component size which we do not want
     */
@@ -45,6 +49,10 @@ export const usePagination = ({
     const firstPageIndex = 1;
     const lastPageIndex = totalPageCount;
 
+    /*
+      Case 2: < 1 2 (3) 4 5 ... 50 >
+      No left dots to show, but rights dots to be shown
+    */
     if (!shouldShowLeftDots && shouldShowRightDots) {
       let leftItemCount = 3 + 2 * siblingCount;
       let leftRange = range(1, leftItemCount);
@@ -52,6 +60,10 @@ export const usePagination = ({
       return [...leftRange, DOTS, totalPageCount];
     }
 
+    /*
+      Case 3: < 1 ... 46 47 48 (49) 50 >
+      No right dots to show, but left dots to be shown
+    */
     if (shouldShowLeftDots && !shouldShowRightDots) {
       let rightItemCount = 3 + 2 * siblingCount;
       let rightRange = range(
@@ -61,6 +73,10 @@ export const usePagination = ({
       return [firstPageIndex, DOTS, ...rightRange];
     }
 
+    /*
+      Case 4: < 1 ... 14 (15) 16 ... 50 >
+      Both left and right dots to be shown
+    */
     if (shouldShowLeftDots && shouldShowRightDots) {
       let middleRange = range(leftSiblingIndex, rightSiblingIndex);
       return [firstPageIndex, DOTS, ...middleRange, DOTS, lastPageIndex];
