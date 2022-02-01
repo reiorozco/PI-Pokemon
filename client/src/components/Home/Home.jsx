@@ -9,7 +9,7 @@ import loader from "../../images/loading-image.gif";
 
 import styles from "./Home.module.css";
 
-let PageSize = 9;
+let pageSize = 9;
 
 export default function Home() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -20,8 +20,8 @@ export default function Home() {
   const allPokemons = useSelector((state) => state.allPokemons);
 
   const currentTableData = useMemo(() => {
-    const firstPageIndex = (currentPage - 1) * PageSize;
-    const lastPageIndex = firstPageIndex + PageSize;
+    const firstPageIndex = (currentPage - 1) * pageSize;
+    const lastPageIndex = firstPageIndex + pageSize;
     return (pokemons.length ? pokemons : allPokemons).slice(
       firstPageIndex,
       lastPageIndex
@@ -81,7 +81,7 @@ export default function Home() {
         className={styles["pagination-bar"]}
         currentPage={currentPage}
         totalCount={pokemons.length || allPokemons.length}
-        pageSize={PageSize}
+        pageSize={pageSize}
         onPageChange={(page) => setCurrentPage(page)}
       />
     </div>
