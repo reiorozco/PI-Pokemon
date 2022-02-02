@@ -75,6 +75,7 @@
   height: 5px;
   border-radius: 0.25rem;
   background-color: #eeeeee;
+  overflow: hidden;
 }
 
 .stats-percentage {
@@ -82,5 +83,4 @@
   border-radius: 0.25rem;
   background-color: var(--red-pokemon);
   display: block;
-  /*width: 80%;*/
 }
