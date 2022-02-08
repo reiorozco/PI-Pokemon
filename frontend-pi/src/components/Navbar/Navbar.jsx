@@ -2,6 +2,7 @@ import React from "react";
 import { Link, Outlet } from "react-router-dom";
 
 import styles from "./Navbar.module.css";
+import Footer from "../Footer/Footer";
 
 export default function Navbar() {
   return (
@@ -17,7 +18,10 @@ export default function Navbar() {
           <Link to="/home/new-pokemon">Create Pokemon</Link>
         </button>
       </div>
+
       <Outlet />
+
+      <Footer />
     </>
   );
 }

@@ -1,0 +1,20 @@
+.topnav {
+  background-color: #eeeeee;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+}
+
+.footer-p {
+  margin-left: 5%;
+}
+
+.icons-media {
+  margin-right: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 70px;
+}
