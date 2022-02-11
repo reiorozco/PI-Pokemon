@@ -9,7 +9,13 @@ export default function Filters({ setCurrentPage }) {
   const [existentOrOwn, setExistentOrOwn] = useState("");
   const [order, setOrder] = useState("");
 
+  function resetSearchBar() {
+    document.getElementById("search-bar").reset();
+  }
+
   const handleChangeTypes = (e) => {
+    resetSearchBar();
+
     let array;
 
     arrayTypes.indexOf(e.target.name) !== -1
@@ -21,6 +27,8 @@ export default function Filters({ setCurrentPage }) {
   };
 
   const handleChangeExistentOwn = (e) => {
+    resetSearchBar();
+
     let option;
 
     option = e.target.value;
@@ -30,6 +38,8 @@ export default function Filters({ setCurrentPage }) {
   };
 
   const handleChangeOrder = (e) => {
+    resetSearchBar();
+
     let order;
 
     order = e.target.value;

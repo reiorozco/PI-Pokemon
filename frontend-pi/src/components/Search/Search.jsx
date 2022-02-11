@@ -9,7 +9,13 @@ export default function Search({ setCurrentPage }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    document
+      .querySelectorAll("#formFilters")
+      .forEach((element) => element.reset());
+
     pokemonByName && dispatch(getPokemonByName(pokemonByName));
+
     setCurrentPage(1);
   };
 
@@ -28,7 +34,7 @@ export default function Search({ setCurrentPage }) {
   }, [dispatch, pokemonByName, setCurrentPage]);
 
   return (
-    <form className={styles["form"]} onSubmit={handleSubmit}>
+    <form id="search-bar" className={styles["form"]} onSubmit={handleSubmit}>
       <input
         onChange={handleChange}
         placeholder="Search for pokemons..."
