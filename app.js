@@ -1,5 +1,6 @@
 const express = require("express");
 const morgan = require("morgan");
+const path = require("path");
 
 const pokemonsRoutes = require("./routes/PokemonsRoutes");
 const typesRoutes = require("./routes/TypesRoutes");
@@ -7,6 +8,8 @@ const typesRoutes = require("./routes/TypesRoutes");
 const server = express();
 
 server.name = "API";
+
+server.use(express.static(path.resolve(__dirname, "./client/build")));
 
 server.use(express.urlencoded({ extended: true, limit: "50mb" }));
 server.use(express.json({ limit: "50mb" }));
