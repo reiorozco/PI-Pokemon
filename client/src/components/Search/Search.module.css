@@ -39,7 +39,12 @@
   opacity: 1;
 }
 
-@media (max-width: 576px) {
+@media only screen and (max-width: 600px) {
+  .form {
+    flex-direction: column;
+    margin-bottom: 5px;
+  }
+
   .input {
     width: 80%;
   }

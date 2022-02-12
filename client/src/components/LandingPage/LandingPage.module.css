@@ -38,3 +38,25 @@
   text-decoration: none;
   color: var(--red-pokemon);
 }
+
+@media only screen and (max-width: 600px) {
+  .bg {
+    background-position: bottom right;
+  }
+
+  .container-landing {
+    top: 20%;
+    color: white;
+    text-shadow: 2px 1px 5px black;
+  }
+
+  .h1-landing {
+    font-size: 4rem;
+    color: black;
+    text-shadow: 2px 1px 5px white;
+  }
+
+  .text-landing {
+    text-shadow: 2px 1px 5px black;
+  }
+}

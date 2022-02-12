@@ -27,4 +27,21 @@
   width: 100%;
   display: flex;
   justify-content: center;
+  padding-left: 0;
+}
+
+@media only screen and (max-width: 600px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 10px;
+  }
+
+  .container-cards {
+    display: contents;
+  }
+
+  .pagination-bar {
+    padding-left: 0;
+  }
 }

@@ -77,3 +77,14 @@
   display: flex;
   justify-content: center;
 }
+
+@media only screen and (max-width: 600px) {
+  .borderForm {
+    width: 80%;
+  }
+
+  .stats {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
