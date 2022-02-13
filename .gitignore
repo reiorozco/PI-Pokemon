@@ -327,3 +327,7 @@ Temporary Items
 .apdisk
 
 !/env/
+/client/.env.development
+/client/.env.production
+/env/development.env
+/env/production.env
