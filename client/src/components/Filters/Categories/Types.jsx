@@ -1,18 +1,18 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { filterByType } from "../../../redux/actions";
 import styles from "./Types.module.css";
 
-const Types = ({ arrayTypes, handleChangeTypes }) => {
+const Types = ({
+  arrayTypes,
+  handleChangeTypes,
+  currentTypes,
+  checked,
+  handleChecked,
+}) => {
   const [isActive, setIsActive] = useState(false);
 
-  const allPokemons = useSelector((state) => state.allPokemons);
   const dispatch = useDispatch();
-
-  const currentTypes = useMemo(
-    () => [...new Set(allPokemons.map((t) => t.types).flat())],
-    [allPokemons]
-  );
 
   useEffect(() => {
     dispatch(filterByType(arrayTypes));
@@ -33,7 +33,6 @@ const Types = ({ arrayTypes, handleChangeTypes }) => {
       </div>
       {isActive && (
         <form
-          id="formFilters"
           onChange={(e) => handleChangeTypes(e)}
           className={styles["accordion-content"]}
         >
@@ -42,6 +41,8 @@ const Types = ({ arrayTypes, handleChangeTypes }) => {
               <React.Fragment key={index}>
                 <input
                   type="checkbox"
+                  checked={checked[index]}
+                  onChange={() => handleChecked(index)}
                   className={styles["checkbox"]}
                   name={t}
                   id={`${t}-${index}`}

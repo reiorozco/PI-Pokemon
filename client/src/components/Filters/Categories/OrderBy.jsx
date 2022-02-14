@@ -3,7 +3,12 @@ import { useDispatch } from "react-redux";
 import { orderBy } from "../../../redux/actions";
 import styles from "./OrderBy.module.css";
 
-const OrderBy = ({ order, handleChangeOrder }) => {
+const OrderBy = ({
+  order,
+  handleChangeOrder,
+  checkedOrder,
+  handleCheckedOrder,
+}) => {
   const [isActive, setIsActive] = useState(false);
 
   const dispatch = useDispatch();
@@ -29,7 +34,6 @@ const OrderBy = ({ order, handleChangeOrder }) => {
       </div>
       {isActive && (
         <form
-          id="formFilters"
           onChange={(e) => handleChangeOrder(e)}
           className={styles["accordion-content"]}
         >
@@ -39,6 +43,8 @@ const OrderBy = ({ order, handleChangeOrder }) => {
             name="OrderBy"
             value="Number ID"
             id="Number ID-0"
+            checked={checkedOrder === "Number ID"}
+            onChange={(e) => handleCheckedOrder(e)}
             defaultChecked
           />
           <label htmlFor="Number ID-0" className={styles["btn-types"]}>
@@ -53,6 +59,8 @@ const OrderBy = ({ order, handleChangeOrder }) => {
                   name="OrderBy"
                   value={o}
                   id={`${o}-${index + 1}`}
+                  checked={checkedOrder === o}
+                  onChange={(e) => handleCheckedOrder(e)}
                 />
                 <label
                   htmlFor={`${o}-${index + 1}`}

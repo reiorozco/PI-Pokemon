@@ -1,13 +1,35 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import ExistentOwn from "./Categories/ExistentOwn";
 import OrderBy from "./Categories/OrderBy";
 import Types from "./Categories/Types";
 import styles from "./Filters.module.css";
+import { useSelector } from "react-redux";
 
 export default function Filters({ setCurrentPage }) {
   const [arrayTypes, setArrayTypes] = useState([]);
   const [existentOrOwn, setExistentOrOwn] = useState("");
   const [order, setOrder] = useState("");
+  const [checkedExOwn, setCheckedExOwn] = useState("All");
+  const [checkedOrder, setCheckedOrder] = useState("Number ID");
+
+  const allPokemons = useSelector((state) => state.allPokemons);
+
+  const currentTypes = useMemo(
+    () => [...new Set(allPokemons.map((t) => t.types).flat())],
+    [allPokemons]
+  );
+
+  const [checked, setChecked] = useState(
+    new Array(currentTypes.length).fill(false)
+  );
+
+  function handleChecked(position) {
+    const updatedChecked = checked.map((item, index) =>
+      index === position ? !item : item
+    );
+
+    setChecked(updatedChecked);
+  }
 
   function resetSearchBar() {
     document.getElementById("search-bar").reset();
@@ -26,6 +48,10 @@ export default function Filters({ setCurrentPage }) {
     setCurrentPage(1);
   };
 
+  function handleCheckedExOwn(e) {
+    setCheckedExOwn(e.target.value);
+  }
+
   const handleChangeExistentOwn = (e) => {
     resetSearchBar();
 
@@ -36,6 +62,10 @@ export default function Filters({ setCurrentPage }) {
     setExistentOrOwn(option);
     setCurrentPage(1);
   };
+
+  function handleCheckedOrder(e) {
+    setCheckedOrder(e.target.value);
+  }
 
   const handleChangeOrder = (e) => {
     resetSearchBar();
@@ -52,11 +82,10 @@ export default function Filters({ setCurrentPage }) {
     setArrayTypes([]);
     setExistentOrOwn("");
     setOrder("");
+    setChecked(new Array(currentTypes.length).fill(false));
+    setCheckedExOwn("All");
+    setCheckedOrder("Number ID");
     setCurrentPage(1);
-
-    document
-      .querySelectorAll("#formFilters")
-      .forEach((element) => element.reset());
   };
 
   return (
@@ -69,12 +98,25 @@ export default function Filters({ setCurrentPage }) {
       </div>
 
       <div className={styles["filters"]}>
-        <Types arrayTypes={arrayTypes} handleChangeTypes={handleChangeTypes} />
+        <Types
+          arrayTypes={arrayTypes}
+          handleChangeTypes={handleChangeTypes}
+          currentTypes={currentTypes}
+          checked={checked}
+          handleChecked={handleChecked}
+        />
         <ExistentOwn
           existentOrOwn={existentOrOwn}
           handleChangeExistentOwn={handleChangeExistentOwn}
+          checkedExOwn={checkedExOwn}
+          handleCheckedExOwn={handleCheckedExOwn}
         />
-        <OrderBy order={order} handleChangeOrder={handleChangeOrder} />
+        <OrderBy
+          order={order}
+          handleChangeOrder={handleChangeOrder}
+          checkedOrder={checkedOrder}
+          handleCheckedOrder={handleCheckedOrder}
+        />
       </div>
     </div>
   );

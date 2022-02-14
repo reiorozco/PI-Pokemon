@@ -3,7 +3,12 @@ import { useDispatch } from "react-redux";
 import { filterByOrigin } from "../../../redux/actions";
 import styles from "./ExistentOwn.module.css";
 
-const ExistentOwn = ({ existentOrOwn, handleChangeExistentOwn }) => {
+const ExistentOwn = ({
+  existentOrOwn,
+  handleChangeExistentOwn,
+  checkedExOwn,
+  handleCheckedExOwn,
+}) => {
   const [isActive, setIsActive] = useState(false);
 
   const dispatch = useDispatch();
@@ -29,7 +34,6 @@ const ExistentOwn = ({ existentOrOwn, handleChangeExistentOwn }) => {
       </div>
       {isActive && (
         <form
-          id="formFilters"
           onChange={(e) => handleChangeExistentOwn(e)}
           className={styles["accordion-content"]}
         >
@@ -39,6 +43,8 @@ const ExistentOwn = ({ existentOrOwn, handleChangeExistentOwn }) => {
             name="ExistentOwn"
             value="All"
             id="All-0"
+            checked={checkedExOwn === "All"}
+            onChange={(e) => handleCheckedExOwn(e)}
             defaultChecked
           />
           <label htmlFor="All-0" className={styles["btn-types"]}>
@@ -53,6 +59,8 @@ const ExistentOwn = ({ existentOrOwn, handleChangeExistentOwn }) => {
                   name="ExistentOwn"
                   value={o}
                   id={`${o}-${index + 1}`}
+                  checked={checkedExOwn === o}
+                  onChange={(e) => handleCheckedExOwn(e)}
                 />
                 <label
                   htmlFor={`${o}-${index + 1}`}
