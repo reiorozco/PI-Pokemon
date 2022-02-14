@@ -1,0 +1,45 @@
+.div-center {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.btn {
+  z-index: 1;
+  overflow: hidden;
+  background: transparent;
+  position: relative;
+  padding: 8px 50px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 1em;
+  letter-spacing: 2px;
+  transition: 0.2s ease;
+  font-weight: bold;
+  margin: 5px 0;
+  &.green {
+    border: 4px solid var(--red-pokemon);
+    color: #0e0620;
+    &:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 0;
+      height: 100%;
+      background: var(--red-pokemon);
+      z-index: -1;
+      transition: 0.2s ease;
+    }
+    &:hover {
+      color: white;
+      background: var(--red-pokemon);
+      transition: 0.2s ease;
+
+      &:before {
+        width: 100%;
+      }
+    }
+  }
+}

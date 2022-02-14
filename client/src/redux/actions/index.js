@@ -1,6 +1,5 @@
 import axios from "axios";
 
-
 export const GET_POKEMONS = "GET_POKEMONS";
 export const GET_TYPES = "GET_TYPES";
 export const GET_POKEMON_BY_NAME = "GET_POKEMON_BY_NAME";
@@ -24,7 +23,9 @@ export const getPokemons = () => {
 export const getTypes = () => {
   return async function (dispatch) {
     try {
-      const pokemonsTypes = await axios(`${process.env.REACT_APP_API_URL}/types`);
+      const pokemonsTypes = await axios(
+        `${process.env.REACT_APP_API_URL}/types`
+      );
       dispatch({ type: GET_TYPES, payload: pokemonsTypes.data });
     } catch (error) {
       console.error("Error in action getTypes:", error.message);
