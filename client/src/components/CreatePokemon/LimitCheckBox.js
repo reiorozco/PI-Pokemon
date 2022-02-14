@@ -14,7 +14,7 @@ export default function limitCheckBox() {
       }
 
       if (checkedCount > limit) {
-        console.log("You can select maximum " + limit + " types.");
+        // console.log("You can select maximum " + limit + " types.");
         alert("You can select maximum " + limit + " types.");
         this.checked = false;
       }
