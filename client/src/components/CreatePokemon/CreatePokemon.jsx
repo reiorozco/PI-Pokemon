@@ -17,6 +17,9 @@ let formInputs = {
 };
 
 export default function CreatePokemon() {
+  performance.getEntriesByType("navigation")[0].type === "reload" &&
+    window.location.replace("/error404");
+
   const types = useSelector((state) => state.types);
   const dispatch = useDispatch();
 

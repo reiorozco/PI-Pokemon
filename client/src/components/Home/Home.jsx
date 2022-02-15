@@ -12,6 +12,9 @@ import styles from "./Home.module.css";
 let pageSize = 9;
 
 export default function Home() {
+  performance.getEntriesByType("navigation")[0].type === "reload" &&
+    window.location.replace("/error404");
+
   const [currentPage, setCurrentPage] = useState(1);
 
   // const dispatch = useDispatch();
