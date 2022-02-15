@@ -5,6 +5,9 @@ import styles from "./CardsDetails.module.css";
 import randomImage from "../../images/random-image.png";
 
 function CardsDetails() {
+  performance.getEntriesByType("navigation")[0].type === "reload" &&
+    window.location.replace("/error404");
+
   const allPokemons = useSelector((state) => state.allPokemons);
   const details = useSelector((state) => state.details);
   const { id } = useParams();
