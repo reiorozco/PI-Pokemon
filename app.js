@@ -6,10 +6,11 @@ const pokemonsRoutes = require("./routes/PokemonsRoutes");
 const typesRoutes = require("./routes/TypesRoutes");
 
 const server = express();
+const serveStatic = require("serve-static");
 
 server.name = "API";
 
-server.use(express.static(path.resolve(__dirname, "./client/build")));
+server.use(serveStatic(path.resolve(__dirname, "./client/build")));
 
 server.use(express.urlencoded({ extended: true, limit: "50mb" }));
 server.use(express.json({ limit: "50mb" }));
