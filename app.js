@@ -5,19 +5,18 @@ const path = require("path");
 const pokemonsRoutes = require("./routes/PokemonsRoutes");
 const typesRoutes = require("./routes/TypesRoutes");
 
-const server = express();
-const serveStatic = require("serve-static");
+const router = express.Router();
 
-server.name = "API";
+router.name = "API";
 
-server.use(serveStatic(path.resolve(__dirname, "./client/build")));
+// router.use(express.static(path.resolve(__dirname, "./client/build")));
 
-server.use(express.urlencoded({ extended: true, limit: "50mb" }));
-server.use(express.json({ limit: "50mb" }));
+router.use(express.urlencoded({ extended: true, limit: "50mb" }));
+router.use(express.json({ limit: "50mb" }));
 
-server.use(morgan("dev"));
+router.use(morgan("dev"));
 
-server.use((req, res, next) => {
+router.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "http://localhost:3000");
   res.header("Access-Control-Allow-Credentials", "true");
   res.header(
@@ -29,11 +28,39 @@ server.use((req, res, next) => {
   next();
 });
 
-server.use("/pokemons", pokemonsRoutes);
-server.use("/types", typesRoutes);
+router.use("/api/pokemons", pokemonsRoutes);
+router.use("/api/types", typesRoutes);
+
+// Static routes
+// Serve React build files in production
+if (process.env.NODE_ENV === "production") {
+  // const path = require("path");
+  // Serve the frontend's index.html file at the root route
+  router.get("/", (req, res) => {
+    res.cookie("XSRF-TOKEN", req.csrfToken());
+    res.sendFile(path.resolve(__dirname, "./client/build/index.html"));
+  });
+
+  // Serve the static assets in the frontend's build folder
+  router.use(express.static(path.resolve(__dirname, "./client/build")));
+
+  // Serve the frontend's index.html file at all other routes NOT starting with /api
+  router.get(/^(?!\/?api).*/, (req, res) => {
+    res.cookie("XSRF-TOKEN", req.csrfToken());
+    res.sendFile(path.resolve(__dirname, "./client/build/index.html"));
+  });
+}
+
+// Add a XSRF-TOKEN cookie in development
+if (process.env.NODE_ENV !== "production") {
+  router.get("/api/csrf/restore", (req, res) => {
+    res.cookie("XSRF-TOKEN", req.csrfToken());
+    res.status(201).json({});
+  });
+}
 
 // Error Handling
-server.use((err, req, res) => {
+router.use((err, req, res) => {
   const status = err.status || 500;
   const message = err.message || err;
 
@@ -42,4 +69,4 @@ server.use((err, req, res) => {
   res.status(status).send(message);
 });
 
-module.exports = server;
+module.exports = router;
